@@ -1,22 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+# kidus-production
+
+This is a Next.js app that displays 'kidus production present' on the main page.
 
 ## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Getting Started
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. Install dependencies:
+   ```powershell
+   npm install
+   ```
+2. Run the development server:
+   ```powershell
+   npm run dev
+   ```
+3. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
 ## Learn More
 
