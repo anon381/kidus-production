@@ -27,7 +27,7 @@ export default function Home() {
             zIndex: 0,
           }}
         >
-          <source src="/home-video.mp4" type="video/mp4" />
+          <source src="/home-page-2.mp4" type="video/mp4" />
         </video>
         <div style={{ position: "relative", zIndex: 1, color: "#fff", textAlign: "left", left: 0, top: "38vh", transform: "translateY(-20%)", paddingTop: 0, maxWidth: 600, paddingLeft: "5vw" }}>
           <div style={{ fontSize: "3rem", fontWeight: "bold", color: "#00FFFF", textShadow: "2px 2px 8px #000", marginBottom: "1.5rem" }}>kidus production present</div>
