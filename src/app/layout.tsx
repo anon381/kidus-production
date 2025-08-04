@@ -13,9 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", zIndex: 100 }}>
           <Navbar />
         </div>
-        <div style={{ position: "relative", zIndex: 1, width: "100vw", minHeight: "100vh", paddingTop: "0" }}>
-          {children}
-        </div>
+        {children}
       </body>
     </html>
   );
