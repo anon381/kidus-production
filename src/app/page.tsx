@@ -1,18 +1,39 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 
 export default function Home() {
-  React.useEffect(() => {
+  const [fullscreen, setFullscreen] = useState(true);
+  useEffect(() => {
     document.body.style.overflowX = "hidden";
+    const timer = setTimeout(() => setFullscreen(false), 2000);
     return () => {
       document.body.style.overflowX = "";
+      clearTimeout(timer);
     };
   }, []);
 
   return (
     <>
       <main style={{ position: "relative", width: "100%", height: "100vh", minHeight: "100vh", overflow: "hidden", margin: 0, padding: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: "98vw", maxWidth: "1900px", height: "97vh", margin: "0 auto", paddingRight: "1vw", boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div
+          style={{
+            position: fullscreen ? "fixed" : "relative",
+            top: fullscreen ? 0 : undefined,
+            left: fullscreen ? 0 : undefined,
+            width: fullscreen ? "100vw" : "98vw",
+            height: fullscreen ? "100vh" : "97vh",
+            maxWidth: fullscreen ? "100vw" : "1900px",
+            margin: fullscreen ? 0 : "0 auto",
+            paddingRight: fullscreen ? 0 : "1vw",
+            boxSizing: "border-box",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 10,
+            transition: "all 3s cubic-bezier(0.77,0,0.175,1)",
+          }}
+        >
           <video
             autoPlay
             loop
@@ -22,9 +43,10 @@ export default function Home() {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              borderRadius: "3rem",
-              boxShadow: "0 4px 32px rgba(0,0,0,0.25)",
-              display: "block"
+              borderRadius: fullscreen ? 0 : "3rem",
+              boxShadow: fullscreen ? "none" : "0 4px 32px rgba(0,0,0,0.25)",
+              display: "block",
+              transition: "all 2s cubic-bezier(0.77,0,0.175,1)",
             }}
           >
             <source src="/home-page-2.mp4" type="video/mp4" />
