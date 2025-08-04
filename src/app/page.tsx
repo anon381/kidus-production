@@ -29,9 +29,13 @@ export default function Home() {
         >
           <source src="/home-video.mp4" type="video/mp4" />
         </video>
-        <div style={{ position: "relative", zIndex: 1, color: "#fff", textAlign: "center", top: "30vh", transform: "translateY(-20%)", paddingTop: 0 }}>
-          <h1 style={{ fontSize: "3rem", fontWeight: "bold", marginBottom: "1rem" }}>Home Page</h1>
-          <div style={{ fontSize: "2rem", fontWeight: "bold" }}>kidus production present</div>
+        <div style={{ position: "relative", zIndex: 1, color: "#fff", textAlign: "left", left: 0, top: "38vh", transform: "translateY(-20%)", paddingTop: 0, maxWidth: 600, paddingLeft: "5vw" }}>
+          <div style={{ fontSize: "3rem", fontWeight: "bold", color: "#00FFFF", textShadow: "2px 2px 8px #000", marginBottom: "1.5rem" }}>kidus production present</div>
+          <div style={{ fontSize: "1.2rem", color: "#fff", textShadow: "1px 1px 6px #000", marginBottom: "1.2rem", textAlign: "left" }}>
+            Bringing your dreams to life with creativity, passion, and innovation. Let us help you make your vision a reality.            We turn ideas into reality, delivering excellence in every project. Your story, our production.
+
+          </div>
+          
         </div>
       </main>
       <section style={{ background: "#181818", minHeight: "100vh", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center", gap: "2rem" }}>
