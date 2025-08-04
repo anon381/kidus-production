@@ -3,18 +3,25 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <nav style={{ padding: "1rem 0", background: "transparent" }}>
-      <div
+    <nav
+      style={{
+        padding: "1.5rem 0",
+        background: "transparent",
+        position: "relative",
+        zIndex: 10,
+      }}
+    >
+      <div // to be edited
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          maxWidth: "1100px",
+          maxWidth: "1250px",
           margin: "0 auto",
-          background: "#fff",
+          background: "rgba(30,30,30,0.6)", // dark grey with transparency
           borderRadius: "1.5rem",
           boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-          padding: "0.5rem 2rem",
+          padding: "1.25rem 2.5rem",
         }}
       >
         {/* Left links */}
@@ -40,8 +47,15 @@ export default function Navbar() {
             <Link href="/gallery">Gallery</Link>
           </li>
         </ul>
-        {/* Center title */}
-        <div style={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+        {/* Center title (shifted left) */}
+        <div
+          style={{
+            fontWeight: "bold",
+            fontSize: "1.4rem",
+            marginLeft: "-80px",
+            color: "#fff",
+          }}
+        >
           kidus production
         </div>
         {/* Right link */}
