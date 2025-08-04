@@ -11,7 +11,7 @@ export default function Navbar() {
         zIndex: 10,
       }}
     >
-      <div // to be edited
+      <div
         style={{
           display: "flex",
           alignItems: "center",
@@ -32,6 +32,7 @@ export default function Navbar() {
             listStyle: "none",
             margin: 0,
             padding: 0,
+            color: "#fff",
           }}
         >
           <li>
@@ -66,6 +67,7 @@ export default function Navbar() {
             listStyle: "none",
             margin: 0,
             padding: 0,
+            color: "#fff",
           }}
         >
           <li>
