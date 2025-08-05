@@ -9,9 +9,43 @@ export default function Home() {
   const presentRef = useRef(null);
   const mottoRef = useRef(null);
   const videoRef = useRef(null);
-
   const textContainerRef = useRef(null);
+  // Card refs must be inside the component
+  const cardRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
   useEffect(() => {
+    // GSAP animation for cards: slide in horizontally, then move up as section scrolls out
+    if (typeof window !== "undefined" && cardRefs[0].current) {
+      cardRefs.forEach((ref, i) => {
+        gsap.fromTo(
+          ref.current,
+          { x: i % 2 === 0 ? -120 : 120, opacity: 0, y: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: ref.current,
+              start: "top 80%",
+              end: "+=200",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+        // Move up as section scrolls out
+        gsap.to(ref.current, {
+          y: -100,
+          ease: "power1.inOut",
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 40%",
+            end: "top 10%",
+            scrub: true,
+          },
+        });
+      });
+    }
     if (titleRef.current) {
       gsap.fromTo(
         titleRef.current,
@@ -148,13 +182,13 @@ export default function Home() {
           <div
             ref={mottoRef}
             className="main-motto"
-            style={{ fontSize: "1.2rem", fontWeight: 400, textAlign: "center", maxWidth: 600 }}
+            style={{ fontSize: "2rem", fontWeight: 400, textAlign: "center", maxWidth: 600 }}
           >
-            Bringing your dreams to life with creativity, passion, and innovation.
+            Crafting Sound & Vision <br />Audio Meets Art
           </div>
         </div>
         {/* New section below the video and overlay */}
-        <section
+        {/* <section
           style={{
             width: "100%",
             background: "#fff",
@@ -163,27 +197,136 @@ export default function Home() {
             flexDirection: "column",
             alignItems: "center",
           }}
+         >
+          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
+          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
+            This is a sample content section below the video background. You can add more information, features, or anything you want here.
+          </p>
+          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
+          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
+            This is a sample content section below the video background. You can add more information, features, or anything you want here.
+          </p>
+          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
+          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
+            This is a sample content section below the video background. You can add more information, features, or anything you want here.
+          </p>
+          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
+          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
+            This is a sample content section below the video background. You can add more information, features, or anything you want here.
+          </p>
+          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
+          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
+            This is a sample content section below the video background. You can add more information, features, or anything you want here.
+          </p>
+        </section> */}
+        {/* Services Cards Section */}
+        <section
+          style={{
+            width: "100%",
+            background: "#fff",
+            padding: "3rem 0",
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "2rem",
+          }}
         >
-          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
-          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
-            This is a sample content section below the video background. You can add more information, features, or anything you want here.
-          </p>
-          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
-          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
-            This is a sample content section below the video background. You can add more information, features, or anything you want here.
-          </p>
-          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
-          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
-            This is a sample content section below the video background. You can add more information, features, or anything you want here.
-          </p>
-          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
-          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
-            This is a sample content section below the video background. You can add more information, features, or anything you want here.
-          </p>
-          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
-          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
-            This is a sample content section below the video background. You can add more information, features, or anything you want here.
-          </p>
+          {/* Card 1 */}
+          <div
+            ref={cardRefs[0]}
+            style={{
+              flex: "1 1 480px",
+              maxWidth: 520,
+              minWidth: 320,
+              minHeight: 620,
+              background: "#f7faff",
+              borderRadius: "2.5rem",
+              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+              padding: "3.5rem 2.5rem 3rem 2.5rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center"
+            }}
+          >
+            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎛️</div>
+            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Sound Mixing</h3>
+            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              We blend your tracks to perfection — balancing vocals, instruments, and effects to create a polished, professional sound.
+            </p>
+          </div>
+          {/* Card 2 */}
+          <div
+            ref={cardRefs[1]}
+            style={{
+              flex: "1 1 480px",
+              maxWidth: 520,
+              minWidth: 320,
+              minHeight: 420,
+              background: "#f7faff",
+              borderRadius: "2.5rem",
+              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+              padding: "3.5rem 2.5rem 3rem 2.5rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center"
+            }}
+          >
+            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎚️</div>
+            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Mastering</h3>
+            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              Final touches that make your song radio-ready — boosting clarity, loudness, and consistency across all platforms.
+            </p>
+          </div>
+          {/* Card 3 */}
+          <div
+            ref={cardRefs[2]}
+            style={{
+              flex: "1 1 480px",
+              maxWidth: 520,
+              minWidth: 320,
+              minHeight: 420,
+              background: "#f7faff",
+              borderRadius: "2.5rem",
+              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+              padding: "3.5rem 2.5rem 3rem 2.5rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center"
+            }}
+          >
+            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎤</div>
+            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Recording</h3>
+            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              Capture crystal-clear vocals or instruments in a studio environment designed for creativity and quality.
+            </p>
+          </div>
+          {/* Card 4 */}
+          <div
+            ref={cardRefs[3]}
+            style={{
+              flex: "1 1 480px",
+              maxWidth: 520,
+              minWidth: 320,
+              minHeight: 420,
+              background: "#f7faff",
+              borderRadius: "2.5rem",
+              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+              padding: "3.5rem 2.5rem 3rem 2.5rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center"
+            }}
+          >
+            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎨</div>
+            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Graphic Design</h3>
+            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              From album covers to promo posters, we design visuals that match your sound and stand out everywhere.
+            </p>
+          </div>
         </section>
       </main>
       <style jsx>{`
