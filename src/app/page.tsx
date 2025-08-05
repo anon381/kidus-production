@@ -244,13 +244,15 @@ export default function Home() {
             <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
               We blend your tracks to perfection — balancing vocals, instruments, and effects to create a polished, professional sound.
             </p>
-            <div style={{ width: 650, height: 300, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: 650, height: 300, maxWidth: "100%", maxHeight: "100%", padding: 16, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <img 
                 src="/sound-mixing.jpg" 
                 alt="Sound Mixing"
                 style={{
                   width: "100%",
                   height: "100%",
+                  maxWidth: "100%",
+                  maxHeight: "100%",
                   objectFit: "cover",
                   borderRadius: "1.5rem",
                   boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
@@ -282,13 +284,15 @@ export default function Home() {
             <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
               Final touches that make your song radio-ready — boosting clarity, loudness, and consistency across all platforms.
             </p>
-            <div style={{ width: 650, height: 300, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: 650, height: 300, maxWidth: "100%", maxHeight: "100%", padding: 16, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <img 
                 src="/mastering.jpg" 
                 alt="Mastering"
                 style={{
                   width: "100%",
                   height: "100%",
+                  maxWidth: "100%",
+                  maxHeight: "100%",
                   objectFit: "cover",
                   borderRadius: "1.5rem",
                   boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
@@ -320,13 +324,15 @@ export default function Home() {
             <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
               Capture crystal-clear vocals or instruments in a studio environment designed for creativity and quality.
             </p>
-            <div style={{ width: 650, height: 300, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: 650, height: 300, maxWidth: "100%", maxHeight: "100%", padding: 16, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <img 
                 src="/recording.jpg" 
                 alt="Recording"
                 style={{
                   width: "100%",
                   height: "100%",
+                  maxWidth: "100%",
+                  maxHeight: "100%",
                   objectFit: "cover",
                   borderRadius: "1.5rem",
                   boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
@@ -358,13 +364,15 @@ export default function Home() {
             <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
               From album covers to promo posters, we design visuals that match your sound and stand out everywhere.
             </p>
-            <div style={{ width: 650, height: 300, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: 650, height: 300, maxWidth: "100%", maxHeight: "100%", padding: 16, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <img 
                 src="/design.jpg" 
                 alt="Graphic Design"
                 style={{
                   width: "100%",
                   height: "100%",
+                  maxWidth: "100%",
+                  maxHeight: "100%",
                   objectFit: "cover",
                   borderRadius: "1.5rem",
                   boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
