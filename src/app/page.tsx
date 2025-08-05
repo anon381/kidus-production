@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CardContainer, CardBody, CardItem } from "../../components/ui/3d-card";
 import InfiniteMovingCardsDemo from "../../components/infinite-moving-cards-demo";
+import AnimatedTestimonialsDemo from "../../components/animated-testimonials-demo";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -540,12 +541,22 @@ export default function Home() {
             </div>
           )}
         </section>
+                {/* Featured Projects / Clients */}
+
         <section style={{ width: "100%", background: "#f7faff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <div style={{ width: "100%", maxWidth: 1200 }}>
             <InfiniteMovingCardsDemo />
           </div>
         </section>
-   
+
+        {/* Testimonial Section */}
+        <section style={{ width: "100%", background: "#fff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1.5rem" }}>Testimonials</h2>
+          <div style={{ width: "100%", maxWidth: 1200 }}>
+            {/* AnimatedTestimonialsDemo expects to be imported from components/animated-testimonials-demo */}
+            <AnimatedTestimonialsDemo />
+          </div>
+        </section>
 
         {/* Why Choose Us Section */}
         <section style={{ width: "100%", background: "#fff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
