@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CardContainer, CardBody, CardItem } from "../../components/ui/3d-card";
+import InfiniteMovingCardsDemo from "../../components/infinite-moving-cards-demo";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -540,9 +541,8 @@ export default function Home() {
           )}
         </section>
         <section style={{ width: "100%", background: "#f7faff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1.5rem" }}>Featured Projects / Clients</h2>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem", justifyContent: "center", alignItems: "center", width: "100%", maxWidth: 1200 }}>
-             {/* Add more as needed */}
+          <div style={{ width: "100%", maxWidth: 1200 }}>
+            <InfiniteMovingCardsDemo />
           </div>
         </section>
    
