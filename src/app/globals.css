@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+/* Only for InfiniteMovingCards component */
+.infinite-moving-cards-animate {
+  animation: infinite-moving-cards-scroll var(--animation-duration,40s) linear infinite;
+  animation-direction: var(--animation-direction,forwards);
+}
+@keyframes infinite-moving-cards-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
