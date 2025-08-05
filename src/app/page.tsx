@@ -381,8 +381,32 @@ export default function Home() {
             </div>
           </div>
         </section>
-        
-         
+        <section style={{ width: "100%", background: "#f7faff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1.5rem" }}>Featured Projects / Clients</h2>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem", justifyContent: "center", alignItems: "center", width: "100%", maxWidth: 1200 }}>
+            Example logos or album covers, replace src with your own
+             {/* Add more as needed */}
+          </div>
+        </section>
+   
+
+        {/* Why Choose Us Section */}
+        <section style={{ width: "100%", background: "#fff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1.5rem" }}>Why Choose Us?</h2>
+          <ul style={{ color: "#222", fontSize: "1.2rem", maxWidth: 700, margin: 0, padding: 0, listStyle: "none" }}>
+            <li style={{ marginBottom: 12, display: "flex", alignItems: "center" }}><span style={{ color: "#3498ff", fontSize: "1.5rem", marginRight: 10 }}>✔️</span>Industry-standard equipment</li>
+            <li style={{ marginBottom: 12, display: "flex", alignItems: "center" }}><span style={{ color: "#3498ff", fontSize: "1.5rem", marginRight: 10 }}>✔️</span>Experienced team</li>
+            <li style={{ marginBottom: 12, display: "flex", alignItems: "center" }}><span style={{ color: "#3498ff", fontSize: "1.5rem", marginRight: 10 }}>✔️</span>Affordable packages</li>
+            <li style={{ marginBottom: 12, display: "flex", alignItems: "center" }}><span style={{ color: "#3498ff", fontSize: "1.5rem", marginRight: 10 }}>✔️</span>Fast turnaround & personal support</li>
+          </ul>
+        </section>
+        {/* Quick Contact CTA Section */}
+        <section style={{ width: "100%", background: "#f7faff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1.5rem" }}>Ready to Start?</h2>
+          <div style={{ display: "flex", gap: "1.5rem" }}>
+            <a href="/contact" style={{ background: "#3498ff", color: "#fff", fontWeight: 600, fontSize: "1.2rem", padding: "1rem 2.5rem", borderRadius: 32, textDecoration: "none", boxShadow: "0 2px 8px rgba(52,152,255,0.10)", transition: "background 0.2s" }}>Let’s Work Together</a>
+          </div>
+        </section>
       </main>
       <style jsx>{`
         @media (max-width: 900px) {
@@ -405,6 +429,9 @@ export default function Home() {
           }
           .main-motto {
             font-size: 1rem !important;
+          }
+          #services-cards-section {
+            padding-bottom: 1rem !important;
           }
         }
       `}</style>
