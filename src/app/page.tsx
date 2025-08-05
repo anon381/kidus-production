@@ -17,17 +17,34 @@ export default function Home() {
     if (typeof window !== "undefined") {
       const section = document.getElementById("services-cards-section");
       if (section) {
-        // Calculate how much to scroll so the last card is centered
         const cards = section.querySelectorAll('[data-card]');
         if (cards.length > 0) {
-          const lastCard = cards[cards.length - 1];
-          const sectionRect = section.getBoundingClientRect();
-          const lastCardRect = lastCard.getBoundingClientRect();
-          // The amount to move section left so last card is centered in viewport
+          const lastCard = cards[cards.length - 1] as HTMLElement;
           const viewportWidth = window.innerWidth;
-          const lastCardEl = lastCard as HTMLElement;
-          const lastCardCenter = lastCardEl.offsetLeft + lastCardEl.offsetWidth / 2;
-          const scrollAmount = lastCardCenter - viewportWidth / 2;
+          let scrollAmount;
+          if (viewportWidth <= 600) {
+            // Phones: scroll only until the last card's right edge is visible
+            const lastCardRight = lastCard.offsetLeft + lastCard.offsetWidth;
+            const sectionLeft = section.offsetLeft;
+            scrollAmount = (lastCardRight - sectionLeft) - viewportWidth + 16; // 16px buffer
+            if (scrollAmount < 0) scrollAmount = 0;
+          } else if (viewportWidth <= 900) {
+            // Tablets: scroll until last card is centered
+            const lastCardCenter = lastCard.offsetLeft + lastCard.offsetWidth / 2;
+            scrollAmount = lastCardCenter - viewportWidth / 2;
+            if (scrollAmount < 0) scrollAmount = 0;
+          } else if (viewportWidth <= 1200) {
+            // Small Laptops: scroll until last card is centered
+            const lastCardCenter = lastCard.offsetLeft + lastCard.offsetWidth / 2;
+            scrollAmount = lastCardCenter - viewportWidth / 2;
+            if (scrollAmount < 0) scrollAmount = 0;
+          } else {
+            // Desktops: scroll until the last card's right edge is visible
+            const lastCardRight = lastCard.offsetLeft + lastCard.offsetWidth;
+            const sectionLeft = section.offsetLeft;
+            scrollAmount = (lastCardRight - sectionLeft) - viewportWidth + 32; // 32px buffer for gap
+            if (scrollAmount < 0) scrollAmount = 0;
+          }
           gsap.to(section, {
             x: () => `-${scrollAmount}px`,
             ease: "none",
@@ -350,6 +367,20 @@ export default function Home() {
         </section>
       </main>
       <style jsx>{`
+        @media (max-width: 900px) {
+          [data-card] {
+            min-width: 95vw !important;
+            max-width: 95vw !important;
+            padding: 2rem 0.7rem 2rem 0.7rem !important;
+            min-height: 420px !important;
+          }
+          [data-card] h3 {
+            font-size: 1.3rem !important;
+          }
+          [data-card] p, [data-card] div {
+            font-size: 1rem !important;
+          }
+        }
         @media (max-width: 600px) {
           .main-title {
             font-size: 2rem !important;
