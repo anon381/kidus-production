@@ -244,8 +244,18 @@ export default function Home() {
             <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
               We blend your tracks to perfection — balancing vocals, instruments, and effects to create a polished, professional sound.
             </p>
-            <div style={{ marginTop: "2.5rem", color: "#888", fontSize: "1.3rem", maxWidth: 700 }}>
-              I mix sound with my own professional mixer, having worked in different studios and venues. My work has received great feedback from artists and producers alike, ensuring every project sounds unique and polished.
+            <div style={{ width: 650, height: 300, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <img 
+                src="/sound-mixing.jpg" 
+                alt="Sound Mixing"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "1.5rem",
+                  boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
+                }}
+              />
             </div>
           </div>
           {/* Card 2 */}
@@ -272,8 +282,18 @@ export default function Home() {
             <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
               Final touches that make your song radio-ready — boosting clarity, loudness, and consistency across all platforms.
             </p>
-            <div style={{ marginTop: "2.5rem", color: "#888", fontSize: "1.3rem", maxWidth: 700 }}>
-              My mastering process is both digital and analog, tailored to your genre and vision. I focus on clarity and punch, so your tracks stand out everywhere. Clients appreciate my attention to detail and fast turnaround.
+            <div style={{ width: 650, height: 300, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <img 
+                src="/mastering.jpg" 
+                alt="Mastering"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "1.5rem",
+                  boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
+                }}
+              />
             </div>
           </div>
           {/* Card 3 */}
@@ -300,8 +320,18 @@ export default function Home() {
             <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
               Capture crystal-clear vocals or instruments in a studio environment designed for creativity and quality.
             </p>
-            <div style={{ marginTop: "2.5rem", color: "#888", fontSize: "1.3rem", maxWidth: 700 }}>
-              I record vocals and instruments in a comfortable, creative environment. Artists trust me to capture their best takes, and I always strive for a relaxed, productive session.
+            <div style={{ width: 650, height: 300, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <img 
+                src="/recording.jpg" 
+                alt="Recording"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "1.5rem",
+                  boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
+                }}
+              />
             </div>
           </div>
           {/* Card 4 */}
@@ -328,8 +358,18 @@ export default function Home() {
             <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
               From album covers to promo posters, we design visuals that match your sound and stand out everywhere.
             </p>
-            <div style={{ marginTop: "2.5rem", color: "#888", fontSize: "1.3rem", maxWidth: 700 }}>
-              I design album covers, posters, and promo materials that reflect your sound and story. My designs have helped artists build their brand and connect with fans visually.
+            <div style={{ width: 650, height: 300, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <img 
+                src="/design.jpg" 
+                alt="Graphic Design"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "1.5rem",
+                  boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
+                }}
+              />
             </div>
           </div>
         </section>
