@@ -27,7 +27,7 @@ export default function Home() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  // Card refs must be inside the component
+  // Card refs should be inside the component
   const cardRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
   useEffect(() => {
     // GSAP ScrollTrigger: as you scroll down, cards section slides horizontally from right to left, pinning until last card is centered
