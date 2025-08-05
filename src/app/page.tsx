@@ -384,7 +384,6 @@ export default function Home() {
         <section style={{ width: "100%", background: "#f7faff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1.5rem" }}>Featured Projects / Clients</h2>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem", justifyContent: "center", alignItems: "center", width: "100%", maxWidth: 1200 }}>
-            Example logos or album covers, replace src with your own
              {/* Add more as needed */}
           </div>
         </section>
