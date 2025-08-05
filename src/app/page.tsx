@@ -205,15 +205,15 @@ export default function Home() {
                 textOverflow: "ellipsis"
               }}
             >
-              kidus production present
+              Sound that Speaks. Quality that Lasts.
             </div>
           </div>
           <div
             ref={mottoRef}
             className="main-motto"
-            style={{ fontSize: "2rem", fontWeight: 400, textAlign: "center", maxWidth: 600 }}
+            style={{ fontSize: "1.5rem", fontWeight: 400, textAlign: "center", maxWidth: 700, lineHeight: 1.6 }}
           >
-            Crafting Sound & Vision <br />Audio Meets Art
+            At Kidus Production, we bring unmatched clarity and emotion to your sound. Whether it’s mixing, mastering, recording, or sound design, we craft audio that resonates.
           </div>
         </div>
    
