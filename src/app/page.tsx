@@ -13,38 +13,36 @@ export default function Home() {
   // Card refs must be inside the component
   const cardRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
   useEffect(() => {
-    // GSAP animation for cards: slide in horizontally, then move up as section scrolls out
-    if (typeof window !== "undefined" && cardRefs[0].current) {
-      cardRefs.forEach((ref, i) => {
-        gsap.fromTo(
-          ref.current,
-          { x: i % 2 === 0 ? -120 : 120, opacity: 0, y: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out",
+    // GSAP ScrollTrigger: as you scroll down, cards section slides horizontally from right to left, pinning until last card is centered
+    if (typeof window !== "undefined") {
+      const section = document.getElementById("services-cards-section");
+      if (section) {
+        // Calculate how much to scroll so the last card is centered
+        const cards = section.querySelectorAll('[data-card]');
+        if (cards.length > 0) {
+          const lastCard = cards[cards.length - 1];
+          const sectionRect = section.getBoundingClientRect();
+          const lastCardRect = lastCard.getBoundingClientRect();
+          // The amount to move section left so last card is centered in viewport
+          const viewportWidth = window.innerWidth;
+          const lastCardEl = lastCard as HTMLElement;
+          const lastCardCenter = lastCardEl.offsetLeft + lastCardEl.offsetWidth / 2;
+          const scrollAmount = lastCardCenter - viewportWidth / 2;
+          gsap.to(section, {
+            x: () => `-${scrollAmount}px`,
+            ease: "none",
             scrollTrigger: {
-              trigger: ref.current,
-              start: "top 80%",
-              end: "+=200",
-              toggleActions: "play none none reverse",
+              trigger: section,
+              start: "top top",
+              end: () => `+=${scrollAmount}`,
+              scrub: true,
+              pin: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true
             },
-          }
-        );
-        // Move up as section scrolls out
-        gsap.to(ref.current, {
-          y: -100,
-          ease: "power1.inOut",
-          scrollTrigger: {
-            trigger: ref.current,
-            start: "top 40%",
-            end: "top 10%",
-            scrub: true,
-          },
-        });
-      });
+          });
+        }
+      }
     }
     if (titleRef.current) {
       gsap.fromTo(
@@ -187,8 +185,139 @@ export default function Home() {
             Crafting Sound & Vision <br />Audio Meets Art
           </div>
         </div>
-        {/* New section below the video and overlay */}
-        {/* <section
+   
+        {/* Services Cards Section */}
+        <section
+          id="services-cards-section"
+          style={{
+            width: "fit-content",
+            minWidth: "100vw",
+            background: "#fff",
+            padding: "3rem 0",
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            justifyContent: "flex-start",
+            alignItems: "stretch",
+            gap: "3.5rem",
+            willChange: "transform"
+          }}
+        >
+          {/* Card 1 */}
+          <div
+            ref={cardRefs[0]}
+            data-card
+            style={{
+              flex: "1 1 1100px",
+              maxWidth: 1200,
+              minWidth: 800,
+              minHeight: 620,
+              background: "#f7faff",
+              borderRadius: "2.5rem",
+              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+              padding: "3.5rem 2.5rem 3rem 2.5rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center"
+            }}
+          >
+            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎛️</div>
+            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Sound Mixing</h3>
+            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              We blend your tracks to perfection — balancing vocals, instruments, and effects to create a polished, professional sound.
+            </p>
+            <div style={{ marginTop: "2.5rem", color: "#888", fontSize: "1.3rem", maxWidth: 700 }}>
+              I mix sound with my own professional mixer, having worked in different studios and venues. My work has received great feedback from artists and producers alike, ensuring every project sounds unique and polished.
+            </div>
+          </div>
+          {/* Card 2 */}
+          <div
+            ref={cardRefs[1]}
+            data-card
+            style={{
+              flex: "1 1 1100px",
+              maxWidth: 1200,
+              minWidth: 800,
+              minHeight: 420,
+              background: "#f7faff",
+              borderRadius: "2.5rem",
+              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+              padding: "3.5rem 2.5rem 3rem 2.5rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center"
+            }}
+          >
+            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎚️</div>
+            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Mastering</h3>
+            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              Final touches that make your song radio-ready — boosting clarity, loudness, and consistency across all platforms.
+            </p>
+            <div style={{ marginTop: "2.5rem", color: "#888", fontSize: "1.3rem", maxWidth: 700 }}>
+              My mastering process is both digital and analog, tailored to your genre and vision. I focus on clarity and punch, so your tracks stand out everywhere. Clients appreciate my attention to detail and fast turnaround.
+            </div>
+          </div>
+          {/* Card 3 */}
+          <div
+            ref={cardRefs[2]}
+            data-card
+            style={{
+              flex: "1 1 1100px",
+              maxWidth: 1200,
+              minWidth: 800,
+              minHeight: 420,
+              background: "#f7faff",
+              borderRadius: "2.5rem",
+              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+              padding: "3.5rem 2.5rem 3rem 2.5rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center"
+            }}
+          >
+            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎤</div>
+            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Recording</h3>
+            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              Capture crystal-clear vocals or instruments in a studio environment designed for creativity and quality.
+            </p>
+            <div style={{ marginTop: "2.5rem", color: "#888", fontSize: "1.3rem", maxWidth: 700 }}>
+              I record vocals and instruments in a comfortable, creative environment. Artists trust me to capture their best takes, and I always strive for a relaxed, productive session.
+            </div>
+          </div>
+          {/* Card 4 */}
+          <div
+            ref={cardRefs[3]}
+            data-card
+            style={{
+              flex: "1 1 1100px",
+              maxWidth: 1200,
+              minWidth: 800,
+              minHeight: 420,
+              background: "#f7faff",
+              borderRadius: "2.5rem",
+              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+              padding: "3.5rem 2.5rem 3rem 2.5rem",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center"
+            }}
+          >
+            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎨</div>
+            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Graphic Design</h3>
+            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              From album covers to promo posters, we design visuals that match your sound and stand out everywhere.
+            </p>
+            <div style={{ marginTop: "2.5rem", color: "#888", fontSize: "1.3rem", maxWidth: 700 }}>
+              I design album covers, posters, and promo materials that reflect your sound and story. My designs have helped artists build their brand and connect with fans visually.
+            </div>
+          </div>
+        </section>
+     {/* New section below the video and overlay */}
+        <section
           style={{
             width: "100%",
             background: "#fff",
@@ -218,115 +347,6 @@ export default function Home() {
           <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
             This is a sample content section below the video background. You can add more information, features, or anything you want here.
           </p>
-        </section> */}
-        {/* Services Cards Section */}
-        <section
-          style={{
-            width: "100%",
-            background: "#fff",
-            padding: "3rem 0",
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: "2rem",
-          }}
-        >
-          {/* Card 1 */}
-          <div
-            ref={cardRefs[0]}
-            style={{
-              flex: "1 1 480px",
-              maxWidth: 520,
-              minWidth: 320,
-              minHeight: 620,
-              background: "#f7faff",
-              borderRadius: "2.5rem",
-              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
-              padding: "3.5rem 2.5rem 3rem 2.5rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center"
-            }}
-          >
-            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎛️</div>
-            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Sound Mixing</h3>
-            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              We blend your tracks to perfection — balancing vocals, instruments, and effects to create a polished, professional sound.
-            </p>
-          </div>
-          {/* Card 2 */}
-          <div
-            ref={cardRefs[1]}
-            style={{
-              flex: "1 1 480px",
-              maxWidth: 520,
-              minWidth: 320,
-              minHeight: 420,
-              background: "#f7faff",
-              borderRadius: "2.5rem",
-              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
-              padding: "3.5rem 2.5rem 3rem 2.5rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center"
-            }}
-          >
-            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎚️</div>
-            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Mastering</h3>
-            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              Final touches that make your song radio-ready — boosting clarity, loudness, and consistency across all platforms.
-            </p>
-          </div>
-          {/* Card 3 */}
-          <div
-            ref={cardRefs[2]}
-            style={{
-              flex: "1 1 480px",
-              maxWidth: 520,
-              minWidth: 320,
-              minHeight: 420,
-              background: "#f7faff",
-              borderRadius: "2.5rem",
-              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
-              padding: "3.5rem 2.5rem 3rem 2.5rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center"
-            }}
-          >
-            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎤</div>
-            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Recording</h3>
-            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              Capture crystal-clear vocals or instruments in a studio environment designed for creativity and quality.
-            </p>
-          </div>
-          {/* Card 4 */}
-          <div
-            ref={cardRefs[3]}
-            style={{
-              flex: "1 1 480px",
-              maxWidth: 520,
-              minWidth: 320,
-              minHeight: 420,
-              background: "#f7faff",
-              borderRadius: "2.5rem",
-              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
-              padding: "3.5rem 2.5rem 3rem 2.5rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center"
-            }}
-          >
-            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎨</div>
-            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Graphic Design</h3>
-            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              From album covers to promo posters, we design visuals that match your sound and stand out everywhere.
-            </p>
-          </div>
         </section>
       </main>
       <style jsx>{`
