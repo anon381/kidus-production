@@ -117,17 +117,17 @@ export default function Home() {
             height: "100vh",
             display: "flex",
             flexDirection: "column",
-            alignItems: "flex-start",
+            alignItems: "center",
             justifyContent: "center",
             color: "#fff",
             textShadow: "2px 2px 8px #000",
             boxSizing: "border-box",
             paddingLeft: 0,
             paddingRight: 0,
-            marginLeft: "2rem"
+            marginLeft: 0
           }}
         >
-          <div style={{ maxWidth: 700, width: "100%", marginLeft: "-0.1vw" }}>
+          <div style={{ maxWidth: 700, width: "100%", marginLeft: 0 }}>
             <div
               ref={titleRef}
               className="main-title"
@@ -135,7 +135,7 @@ export default function Home() {
                 fontSize: "3.5rem",
                 fontWeight: "bold",
                 marginBottom: "0.2rem",
-                textAlign: "left",
+                textAlign: "center",
                 color: "#7ed6fb",
                 whiteSpace: "pre-line",
                 overflow: "hidden",
@@ -148,7 +148,7 @@ export default function Home() {
           <div
             ref={mottoRef}
             className="main-motto"
-            style={{ fontSize: "1.2rem", fontWeight: 400, textAlign: "left", maxWidth: 600 }}
+            style={{ fontSize: "1.2rem", fontWeight: 400, textAlign: "center", maxWidth: 600 }}
           >
             Bringing your dreams to life with creativity, passion, and innovation.
           </div>
