@@ -381,38 +381,8 @@ export default function Home() {
             </div>
           </div>
         </section>
-     {/* New section below the video and overlay */}
-        <section
-          style={{
-            width: "100%",
-            background: "#fff",
-            padding: "3rem 0",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-         >
-          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
-          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
-            This is a sample content section below the video background. You can add more information, features, or anything you want here.
-          </p>
-          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
-          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
-            This is a sample content section below the video background. You can add more information, features, or anything you want here.
-          </p>
-          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
-          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
-            This is a sample content section below the video background. You can add more information, features, or anything you want here.
-          </p>
-          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
-          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
-            This is a sample content section below the video background. You can add more information, features, or anything you want here.
-          </p>
-          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1rem" }}>Welcome to Kidus Production</h2>
-          <p style={{ color: "#333", fontSize: "1.1rem", maxWidth: 600, textAlign: "center" }}>
-            This is a sample content section below the video background. You can add more information, features, or anything you want here.
-          </p>
-        </section>
+        
+         
       </main>
       <style jsx>{`
         @media (max-width: 900px) {
