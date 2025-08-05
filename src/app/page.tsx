@@ -1,7 +1,8 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CardContainer, CardBody, CardItem } from "../../components/ui/3d-card";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
@@ -10,6 +11,19 @@ export default function Home() {
   const mottoRef = useRef(null);
   const videoRef = useRef(null);
   const textContainerRef = useRef(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 900);
+    };
+
+    // Initial check
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   // Card refs must be inside the component
   const cardRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
   useEffect(() => {
@@ -29,14 +43,14 @@ export default function Home() {
             scrollAmount = (lastCardRight - sectionLeft) - viewportWidth + 16; // 16px buffer
             if (scrollAmount < 0) scrollAmount = 0;
           } else if (viewportWidth <= 900) {
-            // Tablets: scroll until last card is centered
-            const lastCardCenter = lastCard.offsetLeft + lastCard.offsetWidth / 2;
-            scrollAmount = lastCardCenter - viewportWidth / 2;
+            // Tablets: scroll until last card's right edge is visible
+            const lastCardRight = lastCard.offsetLeft + lastCard.offsetWidth;
+            scrollAmount = lastCardRight - viewportWidth + 16; // 16px buffer
             if (scrollAmount < 0) scrollAmount = 0;
           } else if (viewportWidth <= 1200) {
-            // Small Laptops: scroll until last card is centered
-            const lastCardCenter = lastCard.offsetLeft + lastCard.offsetWidth / 2;
-            scrollAmount = lastCardCenter - viewportWidth / 2;
+            // Small Laptops: scroll until last card's right edge is visible
+            const lastCardRight = lastCard.offsetLeft + lastCard.offsetWidth;
+            scrollAmount = lastCardRight - viewportWidth + 32; // 32px buffer for gap
             if (scrollAmount < 0) scrollAmount = 0;
           } else {
             // Desktops: scroll until the last card's right edge is visible
@@ -221,165 +235,309 @@ export default function Home() {
           }}
         >
           {/* Card 1 */}
-          <div
-            ref={cardRefs[0]}
-            data-card
-            style={{
-              flex: "1 1 1100px",
-              maxWidth: 1200,
-              minWidth: 800,
-              minHeight: 620,
-              background: "#f7faff",
-              borderRadius: "2.5rem",
-              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
-              padding: "3.5rem 2.5rem 3rem 2.5rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center"
-            }}
-          >
-            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎛️</div>
-            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Sound Mixing</h3>
-            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              We blend your tracks to perfection — balancing vocals, instruments, and effects to create a polished, professional sound.
-            </p>
-            <div style={{ width: 650, height: 300, maxWidth: "100%", maxHeight: "100%", padding: 16, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img 
-                src="/sound-mixing.jpg" 
-                alt="Sound Mixing"
+          {isDesktop ? (
+            <CardContainer className="inter-var">
+              <div
+                ref={cardRefs[0]}
+                data-card
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  objectFit: "cover",
-                  borderRadius: "1.5rem",
-                  boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
+                  flex: "1 1 1100px",
+                  maxWidth: 1200,
+                  minWidth: 800,
+                  minHeight: 620,
+                  background: "#f7faff",
+                  borderRadius: "2.5rem",
+                  boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+                  padding: "3.5rem 2.5rem 3rem 2.5rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center"
                 }}
-              />
+              >
+                <CardItem translateZ="50" className="flex flex-col items-center w-full">
+                  <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎛️</div>
+                  <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Sound Mixing</h3>
+                  <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6, textAlign: "center" }}>
+                    We blend your tracks to perfection — balancing vocals, instruments, and effects to create a polished, professional sound.
+                  </p>
+                  <img
+                    src="/sound-mixing.jpg"
+                    className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl mt-4"
+                    alt="Sound Mixing"
+                  />
+                </CardItem>
+              </div>
+            </CardContainer>
+          ) : (
+            <div
+              ref={cardRefs[0]}
+              data-card
+              style={{
+                flex: "1 1 1100px",
+                maxWidth: 1200,
+                minWidth: 800,
+                minHeight: 620,
+                background: "#f7faff",
+                borderRadius: "2.5rem",
+                boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+                padding: "3.5rem 2.5rem 3rem 2.5rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center"
+              }}
+            >
+              <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎛️</div>
+              <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Sound Mixing</h3>
+              <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
+                We blend your tracks to perfection — balancing vocals, instruments, and effects to create a polished, professional sound.
+              </p>
+              <div style={{ width: 650, height: 300, maxWidth: "100%", maxHeight: "100%", padding: 16, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <img
+                  src="/sound-mixing.jpg"
+                  alt="Sound Mixing"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    objectFit: "cover",
+                    borderRadius: "1.5rem",
+                    boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
+                  }}
+                />
+              </div>
             </div>
-          </div>
+          )}
           {/* Card 2 */}
-          <div
-            ref={cardRefs[1]}
-            data-card
-            style={{
-              flex: "1 1 1100px",
-              maxWidth: 1200,
-              minWidth: 800,
-              minHeight: 420,
-              background: "#f7faff",
-              borderRadius: "2.5rem",
-              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
-              padding: "3.5rem 2.5rem 3rem 2.5rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center"
-            }}
-          >
-            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎚️</div>
-            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Mastering</h3>
-            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              Final touches that make your song radio-ready — boosting clarity, loudness, and consistency across all platforms.
-            </p>
-            <div style={{ width: 650, height: 300, maxWidth: "100%", maxHeight: "100%", padding: 16, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img 
-                src="/mastering.jpg" 
-                alt="Mastering"
+          {isDesktop ? (
+            <CardContainer className="inter-var">
+              <div
+                ref={cardRefs[1]}
+                data-card
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  objectFit: "cover",
-                  borderRadius: "1.5rem",
-                  boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
+                  flex: "1 1 1100px",
+                  maxWidth: 1200,
+                  minWidth: 800,
+                  minHeight: 420,
+                  background: "#f7faff",
+                  borderRadius: "2.5rem",
+                  boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+                  padding: "3.5rem 2.5rem 3rem 2.5rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center"
                 }}
-              />
+              >
+                <CardItem translateZ="50" className="flex flex-col items-center w-full">
+                  <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎚️</div>
+                  <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Mastering</h3>
+                  <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6, textAlign: "center" }}>
+                    Final touches that make your song radio-ready — boosting clarity, loudness, and consistency across all platforms.
+                  </p>
+                  <img
+                    src="/mastering.jpg"
+                    className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl mt-4"
+                    alt="Mastering"
+                  />
+                </CardItem>
+              </div>
+            </CardContainer>
+          ) : (
+            <div
+              ref={cardRefs[1]}
+              data-card
+              style={{
+                flex: "1 1 1100px",
+                maxWidth: 1200,
+                minWidth: 800,
+                minHeight: 420,
+                background: "#f7faff",
+                borderRadius: "2.5rem",
+                boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+                padding: "3.5rem 2.5rem 3rem 2.5rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center"
+              }}
+            >
+              <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎚️</div>
+              <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Mastering</h3>
+              <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
+                Final touches that make your song radio-ready — boosting clarity, loudness, and consistency across all platforms.
+              </p>
+              <div style={{ width: 650, height: 300, maxWidth: "100%", maxHeight: "100%", padding: 16, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <img
+                  src="/mastering.jpg"
+                  alt="Mastering"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    objectFit: "cover",
+                    borderRadius: "1.5rem",
+                    boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
+                  }}
+                />
+              </div>
             </div>
-          </div>
+          )}
           {/* Card 3 */}
-          <div
-            ref={cardRefs[2]}
-            data-card
-            style={{
-              flex: "1 1 1100px",
-              maxWidth: 1200,
-              minWidth: 800,
-              minHeight: 420,
-              background: "#f7faff",
-              borderRadius: "2.5rem",
-              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
-              padding: "3.5rem 2.5rem 3rem 2.5rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center"
-            }}
-          >
-            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎤</div>
-            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Recording</h3>
-            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              Capture crystal-clear vocals or instruments in a studio environment designed for creativity and quality.
-            </p>
-            <div style={{ width: 650, height: 300, maxWidth: "100%", maxHeight: "100%", padding: 16, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img 
-                src="/recording.jpg" 
-                alt="Recording"
+          {isDesktop ? (
+            <CardContainer className="inter-var">
+              <div
+                ref={cardRefs[2]}
+                data-card
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  objectFit: "cover",
-                  borderRadius: "1.5rem",
-                  boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
+                  flex: "1 1 1100px",
+                  maxWidth: 1200,
+                  minWidth: 800,
+                  minHeight: 420,
+                  background: "#f7faff",
+                  borderRadius: "2.5rem",
+                  boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+                  padding: "3.5rem 2.5rem 3rem 2.5rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center"
                 }}
-              />
+              >
+                <CardItem translateZ="50" className="flex flex-col items-center w-full">
+                  <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎤</div>
+                  <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Recording</h3>
+                  <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6, textAlign: "center" }}>
+                    Capture crystal-clear vocals or instruments in a studio environment designed for creativity and quality.
+                  </p>
+                  <img
+                    src="/recording.jpg"
+                    className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl mt-4"
+                    alt="Recording"
+                  />
+                </CardItem>
+              </div>
+            </CardContainer>
+          ) : (
+            <div
+              ref={cardRefs[2]}
+              data-card
+              style={{
+                flex: "1 1 1100px",
+                maxWidth: 1200,
+                minWidth: 800,
+                minHeight: 420,
+                background: "#f7faff",
+                borderRadius: "2.5rem",
+                boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+                padding: "3.5rem 2.5rem 3rem 2.5rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center"
+              }}
+            >
+              <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎤</div>
+              <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Recording</h3>
+              <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
+                Capture crystal-clear vocals or instruments in a studio environment designed for creativity and quality.
+              </p>
+              <div style={{ width: 650, height: 300, maxWidth: "100%", maxHeight: "100%", padding: 16, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <img
+                  src="/recording.jpg"
+                  alt="Recording"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    objectFit: "cover",
+                    borderRadius: "1.5rem",
+                    boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
+                  }}
+                />
+              </div>
             </div>
-          </div>
+          )}
           {/* Card 4 */}
-          <div
-            ref={cardRefs[3]}
-            data-card
-            style={{
-              flex: "1 1 1100px",
-              maxWidth: 1200,
-              minWidth: 800,
-              minHeight: 420,
-              background: "#f7faff",
-              borderRadius: "2.5rem",
-              boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
-              padding: "3.5rem 2.5rem 3rem 2.5rem",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center"
-            }}
-          >
-            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎨</div>
-            <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Graphic Design</h3>
-            <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              From album covers to promo posters, we design visuals that match your sound and stand out everywhere.
-            </p>
-            <div style={{ width: 650, height: 300, maxWidth: "100%", maxHeight: "100%", padding: 16, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img 
-                src="/design.jpg" 
-                alt="Graphic Design"
+          {isDesktop ? (
+            <CardContainer className="inter-var">
+              <div
+                ref={cardRefs[3]}
+                data-card
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  maxWidth: "100%",
-                  maxHeight: "100%",
-                  objectFit: "cover",
-                  borderRadius: "1.5rem",
-                  boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
+                  flex: "1 1 1100px",
+                  maxWidth: 1200,
+                  minWidth: 800,
+                  minHeight: 420,
+                  background: "#f7faff",
+                  borderRadius: "2.5rem",
+                  boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+                  padding: "3.5rem 2.5rem 3rem 2.5rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center"
                 }}
-              />
+              >
+                <CardItem translateZ="50" className="flex flex-col items-center w-full">
+                  <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎨</div>
+                  <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Graphic Design</h3>
+                  <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6, textAlign: "center" }}>
+                    From album covers to promo posters, we design visuals that match your sound and stand out everywhere.
+                  </p>
+                  <img
+                    src="/design.jpg"
+                    className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl mt-4"
+                    alt="Graphic Design"
+                  />
+                </CardItem>
+              </div>
+            </CardContainer>
+          ) : (
+            <div
+              ref={cardRefs[3]}
+              data-card
+              style={{
+                flex: "1 1 1100px",
+                maxWidth: 1200,
+                minWidth: 800,
+                minHeight: 420,
+                background: "#f7faff",
+                borderRadius: "2.5rem",
+                boxShadow: "0 8px 32px 0 rgba(52,152,255,0.12)",
+                padding: "3.5rem 2.5rem 3rem 2.5rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center"
+              }}
+            >
+              <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>🎨</div>
+              <h3 style={{ fontSize: "1.7rem", fontWeight: 700, marginBottom: "0.7rem", color: "#3498ff" }}>Graphic Design</h3>
+              <p style={{ color: "#222", fontSize: "1.1rem", lineHeight: 1.6 }}>
+                From album covers to promo posters, we design visuals that match your sound and stand out everywhere.
+              </p>
+              <div style={{ width: 650, height: 300, maxWidth: "100%", maxHeight: "100%", padding: 16, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <img
+                  src="/design.jpg"
+                  alt="Graphic Design"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    objectFit: "cover",
+                    borderRadius: "1.5rem",
+                    boxShadow: "0 4px 16px 0 rgba(52,152,255,0.10)"
+                  }}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </section>
         <section style={{ width: "100%", background: "#f7faff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1.5rem" }}>Featured Projects / Clients</h2>
