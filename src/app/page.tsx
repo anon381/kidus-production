@@ -579,10 +579,30 @@ export default function Home() {
           </ul>
         </section> */}
         {/* Quick Contact CTA Section */}
-        <section style={{ width: "100%", background: "#f7faff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1.5rem" }}>Ready to Start?</h2>
-          <div style={{ display: "flex", gap: "1.5rem" }}>
-            <a href="/contact" style={{ background: "#3498ff", color: "#fff", fontWeight: 600, fontSize: "1.2rem", padding: "1rem 2.5rem", borderRadius: 32, textDecoration: "none", boxShadow: "0 2px 8px rgba(52,152,255,0.10)", transition: "background 0.2s" }}>Let’s Work Together</a>
+        <section style={{ position: "relative", width: "100%", minHeight: 500, padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            style={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              zIndex: 0,
+              minHeight: 500
+            }}
+          >
+            <source src="/h1.mp4" type="video/mp4" />
+          </video>
+          <div style={{ position: "relative", zIndex: 1, width: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <h2 style={{ color: "#fff", fontSize: "2rem", marginBottom: "1.5rem", textShadow: "2px 2px 8px #000" }}>Ready to Start?</h2>
+            <div style={{ display: "flex", gap: "1.5rem" }}>
+              <a href="/contact" style={{ background: "#3498ff", color: "#fff", fontWeight: 600, fontSize: "1.2rem", padding: "1rem 2.5rem", borderRadius: 32, textDecoration: "none", boxShadow: "0 2px 8px rgba(52,152,255,0.10)", transition: "background 0.2s" }}>Let’s Work Together</a>
+            </div>
           </div>
         </section>
       </main>
