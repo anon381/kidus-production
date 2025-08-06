@@ -569,7 +569,7 @@ export default function Home() {
         </section>
 
         {/* Why Choose Us Section */}
-        <section style={{ width: "100%", background: "#fff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
+        {/* <section style={{ width: "100%", background: "#fff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1.5rem" }}>Why Choose Us?</h2>
           <ul style={{ color: "#222", fontSize: "1.2rem", maxWidth: 700, margin: 0, padding: 0, listStyle: "none" }}>
             <li style={{ marginBottom: 12, display: "flex", alignItems: "center" }}><span style={{ color: "#3498ff", fontSize: "1.5rem", marginRight: 10 }}>✔️</span>Industry-standard equipment</li>
@@ -577,7 +577,7 @@ export default function Home() {
             <li style={{ marginBottom: 12, display: "flex", alignItems: "center" }}><span style={{ color: "#3498ff", fontSize: "1.5rem", marginRight: 10 }}>✔️</span>Affordable packages</li>
             <li style={{ marginBottom: 12, display: "flex", alignItems: "center" }}><span style={{ color: "#3498ff", fontSize: "1.5rem", marginRight: 10 }}>✔️</span>Fast turnaround & personal support</li>
           </ul>
-        </section>
+        </section> */}
         {/* Quick Contact CTA Section */}
         <section style={{ width: "100%", background: "#f7faff", padding: "3rem 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
           <h2 style={{ color: "#111", fontSize: "2rem", marginBottom: "1.5rem" }}>Ready to Start?</h2>
