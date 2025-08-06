@@ -31,6 +31,12 @@ export default function Home() {
   const cardRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
   useEffect(() => {
     // GSAP ScrollTrigger: as you scroll down, cards section slides horizontally from right to left, pinning until last card is centered
+    let sectionAnim;
+    let videoAnim;
+    let textAnim;
+    let titleAnim;
+    let presentAnim;
+    let mottoAnim;
     if (typeof window !== "undefined") {
       const section = document.getElementById("services-cards-section");
       if (section) {
@@ -62,7 +68,7 @@ export default function Home() {
             scrollAmount = (lastCardRight - sectionLeft) - viewportWidth + 32; // 32px buffer for gap
             if (scrollAmount < 0) scrollAmount = 0;
           }
-          gsap.to(section, {
+          sectionAnim = gsap.to(section, {
             x: () => `-${scrollAmount}px`,
             ease: "none",
             scrollTrigger: {
@@ -79,21 +85,21 @@ export default function Home() {
       }
     }
     if (titleRef.current) {
-      gsap.fromTo(
+      titleAnim = gsap.fromTo(
         titleRef.current,
         { scale: 0.7, opacity: 0, y: -80, x: -80 },
         { scale: 1, opacity: 1, y: 0, x: 0, duration: 1, ease: "power3.out" }
       );
     }
     if (presentRef.current) {
-      gsap.fromTo(
+      presentAnim = gsap.fromTo(
         presentRef.current,
         { scale: 0.7, opacity: 0, y: 80, x: 80 },
         { scale: 1, opacity: 1, y: 0, x: 0, duration: 1, ease: "power3.out", delay: 0.2 }
       );
     }
     if (mottoRef.current) {
-      gsap.fromTo(
+      mottoAnim = gsap.fromTo(
         mottoRef.current,
         { scale: 0.7, opacity: 0, y: 40 },
         { scale: 1, opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.5 }
@@ -110,7 +116,7 @@ export default function Home() {
         marginTop: 0,
         borderRadius: 0
       });
-      gsap.to(videoRef.current, {
+      videoAnim = gsap.to(videoRef.current, {
         width: "calc(100% - 5rem)",
         height: "100vh",
         marginLeft: "2.5rem",
@@ -134,7 +140,7 @@ export default function Home() {
         paddingLeft: 0,
         paddingRight: 0
       });
-      gsap.to(textContainerRef.current, {
+      textAnim = gsap.to(textContainerRef.current, {
         paddingLeft: "2.5rem",
         paddingRight: "2.5rem",
         ease: "power1.inOut",
@@ -146,6 +152,26 @@ export default function Home() {
         },
       });
     }
+
+    // CLEANUP: kill all ScrollTriggers and tweens on unmount
+    return () => {
+      // Kill all ScrollTriggers
+      if (ScrollTrigger && typeof ScrollTrigger.getAll === "function") {
+        ScrollTrigger.getAll().forEach(t => t.kill());
+      }
+      // Kill all tweens for animated elements
+      if (sectionAnim) gsap.killTweensOf(sectionAnim);
+      if (videoAnim) gsap.killTweensOf(videoAnim);
+      if (textAnim) gsap.killTweensOf(textAnim);
+      if (titleAnim) gsap.killTweensOf(titleAnim);
+      if (presentAnim) gsap.killTweensOf(presentAnim);
+      if (mottoAnim) gsap.killTweensOf(mottoAnim);
+      // Optionally, reset transforms
+      const section = document.getElementById("services-cards-section");
+      if (section) section.style.transform = "";
+      if (videoRef.current) videoRef.current.style.transform = "";
+      if (textContainerRef.current) textContainerRef.current.style.transform = "";
+    };
   }, []);
 
   return (
