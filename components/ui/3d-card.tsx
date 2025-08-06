@@ -1,4 +1,20 @@
+
 "use client";
+// Very slight glow effect for CardItem on hover
+if (typeof window !== "undefined") {
+  const styleId = "carditem-slightest-glow-style";
+  if (!document.getElementById(styleId)) {
+    const style = document.createElement("style");
+    style.id = styleId;
+    style.innerHTML = `
+      [data-glow="true"] {
+        box-shadow: 0 0 6px 1px #38bdf8, 0 0 10px 2px #0ea5e9, 0 0 0 1px #fff3 inset;
+        z-index: 2;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
 
 import { cn } from "../../lib/utils";
 import React, {
