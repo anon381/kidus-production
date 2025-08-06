@@ -16,6 +16,10 @@ This is a Next.js app that displays 'kidus production present' on the main page.
    ```powershell
    npm run dev
    ```
-3. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+3. Open [http://localhost:3000] -     in your browser to see the result.
+
+   ```
+   (http://localhost:3000)
+   ```
 
 
