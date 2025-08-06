@@ -18,6 +18,7 @@ export default function LampDemo() {
       >
        Why Hire Me
       </motion.h1>
+      
     </LampContainer>
   );
 }
