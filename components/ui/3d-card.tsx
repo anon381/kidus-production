@@ -8,7 +8,7 @@ if (typeof window !== "undefined") {
     style.id = styleId;
     style.innerHTML = `
       [data-glow="true"] {
-        box-shadow: 0 0 6px 1px #38bdf8, 0 0 10px 2px #0ea5e9, 0 0 0 1px #fff3 inset;
+        box-shadow: 0 0 6px 10px #38bdf8, 0 0 10px 2px #0ea5e9, 0 0 0 1px #fff3 inset;
         z-index: 2;
       }
     `;
