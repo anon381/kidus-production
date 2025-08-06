@@ -1,5 +1,25 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
+// Typing effect hook
+function useTypingEffect(text: string, inView: boolean, speed = 32) {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    if (!inView) {
+      setDisplayed("");
+      return;
+    }
+    let i = 0;
+    setDisplayed("");
+    const interval = setInterval(() => {
+      setDisplayed((prev) => text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, speed);
+    return () => clearInterval(interval);
+  }, [text, inView, speed]);
+  return displayed;
+}
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CardContainer, CardBody, CardItem } from "../../components/ui/3d-card";
@@ -685,54 +705,63 @@ export default function Home() {
         <div style={{ flex: 1, minWidth: 180, display: "flex", flexDirection: "column", gap: 18, maxWidth: 260 }}>
           <span style={{ fontWeight: 700, fontSize: 22, marginBottom: 12 }}>Pages</span>
           <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-            <a href="/" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20 }}>Home</a>
-            <a href="/about" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20 }}>About</a>
-            <a href="/services" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20 }}>Services</a>
-            <a href="/projects" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20 }}>Projects</a>
-            <a href="/contact" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20 }}>Contact</a>
+            <a href="/" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20, border: "2px solid #7ed6fb", borderRadius: 14, padding: "5px 12px", transition: "border-color 0.2s", display: "inline-block", width: "fit-content", minWidth: 0 }}>Home</a>
+            <a href="/about" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20, border: "2px solid #f601a9", borderRadius: 14, padding: "5px 12px", transition: "border-color 0.2s", display: "inline-block", width: "fit-content", minWidth: 0 }}>About</a>
+            <a href="/services" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20, border: "2px solid #25F4EE", borderRadius: 14, padding: "5px 12px", transition: "border-color 0.2s", display: "inline-block", width: "fit-content", minWidth: 0 }}>Services</a>
+            <a href="/projects" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20, border: "2px solid #FFD600", borderRadius: 14, padding: "5px 12px", transition: "border-color 0.2s", display: "inline-block", width: "fit-content", minWidth: 0 }}>Projects</a>
+            <a href="/contact" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20, border: "2px solid #29B6F6", borderRadius: 14, padding: "5px 12px", transition: "border-color 0.2s", display: "inline-block", width: "fit-content", minWidth: 0 }}>Contact</a>
           </div>
         </div>
         {/* Column 2: Motto */}
-        <div style={{ flex: 1, minWidth: 220, display: "flex", flexDirection: "column", alignItems: "center", gap: 18, textAlign: "center", maxWidth: 340 }}>
-          <span style={{ fontWeight: 700, fontSize: 22, marginBottom: 12 }}>Our Motto</span>
-          <span style={{ fontSize: 19, color: "#e5e7eb", opacity: 0.9 }}>
-            Inspiring sound. Creative vision. Unmatched quality.<br />Let’s make something unforgettable.
-          </span>
+        <div style={{ flex: 1, minWidth: 220, display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 18, textAlign: "left", maxWidth: 340 }}>
+          <span style={{ fontWeight: 700, fontSize: 22, marginBottom: 12, textAlign: "left", alignSelf: "flex-start", marginLeft: 60 }}>Our Motto</span>
+          {/* Typing effect for motto */}
+          {(() => {
+            const mottoText = "Inspiring sound. Creative vision. Unmatched quality.\nLet’s make something unforgettable.";
+            const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.3 });
+            const typed = useTypingEffect(mottoText, inView, 24);
+            return (
+              <span ref={ref} style={{ fontSize: 19, color: "#e5e7eb", opacity: 0.9, textAlign: "left", alignSelf: "flex-start", marginLeft: 12, minHeight: 60, whiteSpace: "pre-line", fontFamily: "inherit", letterSpacing: 0.1 }}>
+                {typed}
+                <span style={{ opacity: 0.7, fontWeight: 700, fontSize: 22, marginLeft: 2 }}>{typed.length < mottoText.length ? "|" : ""}</span>
+              </span>
+            );
+          })()}
         </div>
         {/* Column 3: Social Icons */}
         <div style={{ flex: 1, minWidth: 180, display: "flex", flexDirection: "column", alignItems: "center", gap: 22, maxWidth: 260 }}>
           <span style={{ fontWeight: 800, fontSize: 30, marginBottom: 12, textAlign: "left", width: "100%", color: "#e5e7eb", letterSpacing: 1, lineHeight: 1.1, alignSelf: "flex-start" }}>Connect</span>
           <div className="footer-social-icons" style={{ display: "flex", flexDirection: "column", gap: 18, marginTop: 4, justifyContent: "center", width: "100%", alignItems: "flex-start" }}>
             {/* Telegram */}
-            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
               <a href="https://t.me/" target="_blank" rel="noopener" aria-label="Telegram" style={{ color: "#29B6F6", textShadow: "0 0 8px #29B6F6, 0 0 16px #29B6F6", fontSize: 38, transition: 'transform 0.18s' }}>
                 <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.036 15.472l-.396 3.98c.568 0 .814-.244 1.112-.537l2.664-2.53 5.522 4.03c1.012.557 1.73.264 1.98-.936l3.592-16.82c.328-1.52-.552-2.12-1.54-1.76L1.36 9.36c-1.48.6-1.464 1.44-.252 1.824l4.6 1.44 10.68-6.72c.504-.328.96-.146.584.182l-8.664 7.84z" fill="currentColor"/></svg>
               </a>
               <span style={{ color: "#e5e7eb", fontSize: 20, fontWeight: 500, opacity: 0.92 }}>Telegram</span>
             </div>
             {/* TikTok */}
-            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
               <a href="https://tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok" style={{ color: "#25F4EE", textShadow: "0 0 8px #25F4EE, 0 0 16px #FE2C55", fontSize: 38, transition: 'transform 0.18s' }}>
                 <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.5 2v14.5a3.5 3.5 0 11-3.5-3.5h.5V10h-1a6 6 0 106 6V2h-2z" fill="currentColor"/><path d="M16 2v2.5a4.5 4.5 0 004.5 4.5H22V6.5h-1.5A2.5 2.5 0 0118 4.5V2h-2z" fill="currentColor"/></svg>
               </a>
               <span style={{ color: "#e5e7eb", fontSize: 20, fontWeight: 500, opacity: 0.92 }}>TikTok</span>
             </div>
             {/* Instagram */}
-            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
               <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" style={{ color: "#F601A9", textShadow: "0 0 8px #F601A9, 0 0 16px #FFD600", fontSize: 38, transition: 'transform 0.18s' }}>
                 <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="6" stroke="currentColor" strokeWidth="2"/><circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
               </a>
               <span style={{ color: "#e5e7eb", fontSize: 20, fontWeight: 500, opacity: 0.92 }}>Instagram</span>
             </div>
             {/* Twitter */}
-            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
               <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter" style={{ color: "#1DA1F2", textShadow: "0 0 8px #1DA1F2, 0 0 16px #1DA1F2", fontSize: 38, transition: 'transform 0.18s' }}>
                 <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.46 5.924c-.793.352-1.645.59-2.54.698a4.48 4.48 0 001.963-2.475 8.94 8.94 0 01-2.828 1.082A4.48 4.48 0 0016.11 4c-2.485 0-4.5 2.015-4.5 4.5 0 .353.04.697.116 1.027C7.728 9.37 4.1 7.555 1.67 4.905c-.387.664-.61 1.437-.61 2.26 0 1.56.794 2.936 2.003 3.744a4.48 4.48 0 01-2.037-.563v.057c0 2.18 1.55 4.002 3.604 4.418-.377.103-.775.158-1.185.158-.29 0-.57-.028-.844-.08.57 1.78 2.23 3.08 4.19 3.12A8.98 8.98 0 012 19.54a12.67 12.67 0 006.88 2.02c8.26 0 12.78-6.84 12.78-12.78 0-.195-.004-.39-.013-.583A9.18 9.18 0 0024 4.59a8.94 8.94 0 01-2.54.698z" fill="currentColor"/></svg>
               </a>
               <span style={{ color: "#e5e7eb", fontSize: 20, fontWeight: 500, opacity: 0.92 }}>Twitter</span>
             </div>
             {/* Facebook */}
-            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
               <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" style={{ color: "#00FFFB", textShadow: "0 0 8px #00FFFB, 0 0 16px #00FFFB", fontSize: 38, transition: 'transform 0.18s' }}>
                 <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24h11.495v-9.294H9.692v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0" fill="currentColor"/></svg>
               </a>
@@ -743,12 +772,28 @@ export default function Home() {
         </div>
       {/* End of three columns */}
       {/* Footer Bottom Section */}
-      <div style={{ width: "100%", marginTop: 38, display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
-        <div style={{ color: "#e5e7eb", fontSize: 18, opacity: 0.8, fontWeight: 400 }}>
-          &copy; {new Date().getFullYear()} All rights reserved
-        </div>
-        <div style={{ color: "#e5e7eb", fontSize: 17, opacity: 0.7, fontWeight: 400 }}>
-          Developed by <a href="https://github.com/anon381" target="_blank" rel="noopener" style={{ color: "#7ed6fb", textDecoration: "underline", fontWeight: 500 }}>Yabets Maregn</a>
+      <div style={{
+        width: "100%",
+        marginTop: -90,
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "flex-start"
+      }}>
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          marginLeft: "calc(36% + 32px)",
+          marginTop: 0,
+          gap: 2
+        }}>
+          <div style={{ color: "#e5e7eb", fontSize: 17, opacity: 0.8, fontWeight: 400, marginBottom: 2 }}>
+            &copy; 2025 All rights reserved
+          </div>
+          <div style={{ color: "#e5e7eb", fontSize: 16, opacity: 0.7, fontWeight: 400 }}>
+            Developed by <a href="https://github.com/anon381" target="_blank" rel="noopener" style={{ color: "#7ed6fb", textDecoration: "underline", fontWeight: 500 }}>Yabets Maregn</a>
+          </div>
         </div>
       </div>
     </footer>
