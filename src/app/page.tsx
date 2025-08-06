@@ -700,9 +700,9 @@ export default function Home() {
           </span>
         </div>
         {/* Column 3: Social Icons */}
-        <div style={{ flex: 1, minWidth: 180, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 22, maxWidth: 260 }}>
-          <span style={{ fontWeight: 700, fontSize: 22, marginBottom: 12 }}>Connect</span>
-          <div className="footer-social-icons" style={{ display: "flex", gap: 28, marginTop: 4 }}>
+        <div style={{ flex: 1, minWidth: 180, display: "flex", flexDirection: "column", alignItems: "center", gap: 22, maxWidth: 260 }}>
+          <span style={{ fontWeight: 700, fontSize: 22, marginBottom: 12, textAlign: "center", width: "100%" }}>Connect</span>
+          <div className="footer-social-icons" style={{ display: "flex", gap: 28, marginTop: 4, justifyContent: "center", width: "100%" }}>
             {/* Telegram */}
             <a href="https://t.me/" target="_blank" rel="noopener" aria-label="Telegram" style={{ color: "#29B6F6", textShadow: "0 0 8px #29B6F6, 0 0 16px #29B6F6", fontSize: 38, transition: 'transform 0.18s' }}>
               <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.036 15.472l-.396 3.98c.568 0 .814-.244 1.112-.537l2.664-2.53 5.522 4.03c1.012.557 1.73.264 1.98-.936l3.592-16.82c.328-1.52-.552-2.12-1.54-1.76L1.36 9.36c-1.48.6-1.464 1.44-.252 1.824l4.6 1.44 10.68-6.72c.504-.328.96-.146.584.182l-8.664 7.84z" fill="currentColor"/></svg>
