@@ -692,28 +692,32 @@ export default function Home() {
         flexWrap: "nowrap"
       }}
     >
-      <div style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "flex-start",
-        flexWrap: "wrap",
-        marginBottom: 32
-      }}>
+      <div
+        className="footer-columns-row"
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          flexWrap: "wrap",
+          marginBottom: 32,
+          gap: 0
+        }}
+      >
         {/* Column 1: Navigation */}
-        <div style={{ flex: 1, minWidth: 180, display: "flex", flexDirection: "column", gap: 18, maxWidth: 260 }}>
+        <div className="footer-col" style={{ flex: 1, minWidth: 180, display: "flex", flexDirection: "column", gap: 18, maxWidth: 260 }}>
           <span style={{ fontWeight: 700, fontSize: 22, marginBottom: 12 }}>Pages</span>
           <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-            <a href="/" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20, border: "2px solid #7ed6fb", borderRadius: 14, padding: "5px 12px", transition: "border-color 0.2s", display: "inline-block", width: "fit-content", minWidth: 0 }}>Home</a>
-            <a href="/about" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20, border: "2px solid #f601a9", borderRadius: 14, padding: "5px 12px", transition: "border-color 0.2s", display: "inline-block", width: "fit-content", minWidth: 0 }}>About</a>
-            <a href="/services" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20, border: "2px solid #25F4EE", borderRadius: 14, padding: "5px 12px", transition: "border-color 0.2s", display: "inline-block", width: "fit-content", minWidth: 0 }}>Services</a>
-            <a href="/projects" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20, border: "2px solid #FFD600", borderRadius: 14, padding: "5px 12px", transition: "border-color 0.2s", display: "inline-block", width: "fit-content", minWidth: 0 }}>Projects</a>
-            <a href="/contact" style={{ color: "#e5e7eb", textDecoration: "none", fontSize: 20, border: "2px solid #29B6F6", borderRadius: 14, padding: "5px 12px", transition: "border-color 0.2s", display: "inline-block", width: "fit-content", minWidth: 0 }}>Contact</a>
+            <a href="/" className="footer-nav-link home-link">Home</a>
+            <a href="/about" className="footer-nav-link about-link">About</a>
+            <a href="/services" className="footer-nav-link services-link">Services</a>
+            <a href="/projects" className="footer-nav-link projects-link">Projects</a>
+            <a href="/contact" className="footer-nav-link contact-link">Contact</a>
           </div>
         </div>
         {/* Column 2: Motto */}
-        <div style={{ flex: 1, minWidth: 220, display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 18, textAlign: "left", maxWidth: 340 }}>
+        <div className="footer-col" style={{ flex: 1, minWidth: 220, display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 18, textAlign: "left", maxWidth: 340 }}>
           <span style={{ fontWeight: 700, fontSize: 22, marginBottom: 12, textAlign: "left", alignSelf: "flex-start", marginLeft: 60 }}>Our Motto</span>
           {/* Typing effect for motto */}
           {(() => {
@@ -729,8 +733,8 @@ export default function Home() {
           })()}
         </div>
         {/* Column 3: Social Icons */}
-        <div style={{ flex: 1, minWidth: 180, display: "flex", flexDirection: "column", alignItems: "center", gap: 22, maxWidth: 260 }}>
-          <span style={{ fontWeight: 800, fontSize: 30, marginBottom: 12, textAlign: "left", width: "100%", color: "#e5e7eb", letterSpacing: 1, lineHeight: 1.1, alignSelf: "flex-start" }}>Connect</span>
+        <div className="footer-col" style={{ flex: 1, minWidth: 180, display: "flex", flexDirection: "column", alignItems: "center", gap: 22, maxWidth: 260 }}>
+          <span className="footer-connect-label" style={{ fontWeight: 800, fontSize: 30, marginBottom: 12, textAlign: "left", width: "100%", color: "#e5e7eb", letterSpacing: 1, lineHeight: 1.1, alignSelf: "flex-start", transition: "all 0.22s" }}>Connect</span>
           <div className="footer-social-icons" style={{ display: "flex", flexDirection: "column", gap: 18, marginTop: 4, justifyContent: "center", width: "100%", alignItems: "flex-start" }}>
             {/* Telegram */}
             <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
@@ -768,19 +772,20 @@ export default function Home() {
               <span style={{ color: "#e5e7eb", fontSize: 20, fontWeight: 500, opacity: 0.92 }}>Facebook</span>
             </div>
           </div>
-          </div>
         </div>
-      {/* End of three columns */}
+      </div>
+        
+      
       {/* Footer Bottom Section */}
-      <div style={{
+      <div className="footer-bottom-section" style={{
         width: "100%",
-        marginTop: -90,
+        marginTop: 24,
         display: "flex",
         flexDirection: "row",
         justifyContent: "flex-start",
         alignItems: "flex-start"
       }}>
-        <div style={{
+        <div className="footer-bottom-inner" style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
@@ -797,6 +802,7 @@ export default function Home() {
         </div>
       </div>
     </footer>
+
     <style jsx>{`
       .footer-social-icons a {
         will-change: transform;
@@ -808,15 +814,112 @@ export default function Home() {
         transform: scale(1.25);
         z-index: 2;
       }
+      .footer-connect-label {
+        cursor: pointer;
+        text-shadow: 0 0 12px #7ed6fb, 0 0 24px #25F4EE, 0 0 32px #7ed6fb;
+        transition: all 0.22s;
+      }
+      .footer-connect-label:hover {
+        color: #7ed6fb;
+        text-shadow: 0 0 24px #7ed6fb, 0 0 48px #25F4EE, 0 0 64px #7ed6fb;
+        font-size: 38px;
+        letter-spacing: 2px;
+        filter: brightness(1.2) drop-shadow(0 0 8px #7ed6fb);
+      }
+      .footer-nav-link {
+        color: #e5e7eb;
+        text-decoration: none;
+        font-size: 20px;
+        border-radius: 14px;
+        padding: 5px 12px;
+        transition: border-color 0.2s, box-shadow 0.18s, color 0.18s, background 0.18s;
+        display: inline-block;
+        width: fit-content;
+        min-width: 0;
+        margin-bottom: 2px;
+        border: 2px solid #7ed6fb;
+        box-shadow: none;
+      }
+      .footer-nav-link.home-link { border-color: #7ed6fb; }
+      .footer-nav-link.about-link { border-color: #f601a9; }
+      .footer-nav-link.services-link { border-color: #25F4EE; }
+      .footer-nav-link.projects-link { border-color: #FFD600; }
+      .footer-nav-link.contact-link { border-color: #29B6F6; }
+      .footer-nav-link:hover {
+        color: #0a1026;
+        background: #7ed6fb;
+        box-shadow: 0 0 16px #7ed6fb, 0 0 32px #25F4EE;
+        border-color: #25F4EE;
+        font-weight: 700;
+        letter-spacing: 1px;
+        filter: brightness(1.2) drop-shadow(0 0 8px #7ed6fb);
+      }
+      .footer-nav-link.about-link:hover {
+        background: #f601a9;
+        color: #fff;
+        border-color: #f601a9;
+        box-shadow: 0 0 16px #f601a9, 0 0 32px #FFD600;
+      }
+      .footer-nav-link.services-link:hover {
+        background: #25F4EE;
+        color: #fff;
+        border-color: #25F4EE;
+        box-shadow: 0 0 16px #25F4EE, 0 0 32px #7ed6fb;
+      }
+      .footer-nav-link.projects-link:hover {
+        background: #FFD600;
+        color: #0a1026;
+        border-color: #FFD600;
+        box-shadow: 0 0 16px #FFD600, 0 0 32px #f601a9;
+      }
+      .footer-nav-link.contact-link:hover {
+        background: #29B6F6;
+        color: #fff;
+        border-color: #29B6F6;
+        box-shadow: 0 0 16px #29B6F6, 0 0 32px #7ed6fb;
+      }
       @media (max-width: 900px) {
         footer {
           padding-left: 2rem !important;
           padding-right: 2rem !important;
         }
-        footer > div {
-          align-items: flex-start !important;
-          text-align: left !important;
+        .footer-columns-row {
+          flex-direction: column !important;
+          gap: 32px !important;
+        }
+        .footer-col {
+          min-width: 0 !important;
           max-width: 100% !important;
+          width: 100% !important;
+          align-items: center !important;
+          text-align: center !important;
+        }
+        .footer-col > span,
+        .footer-col > div,
+        .footer-col .footer-connect-label {
+          text-align: center !important;
+          align-self: center !important;
+        }
+        .footer-bottom-section {
+          flex-direction: column !important;
+          align-items: center !important;
+          justify-content: center !important;
+          margin-top: 24px !important;
+        }
+        .footer-bottom-inner {
+          margin-left: 0 !important;
+          align-items: center !important;
+          text-align: center !important;
+        }
+        .footer-social-icons {
+          align-items: center !important;
+          justify-content: center !important;
+          width: 100% !important;
+        }
+        .footer-social-icons > div {
+          justify-content: center !important;
+          align-items: center !important;
+          width: 100% !important;
         }
       }
       @media (max-width: 600px) {
@@ -826,6 +929,15 @@ export default function Home() {
         }
         .footer-social-icons a {
           font-size: 28px !important;
+        }
+        .footer-connect-label {
+          font-size: 22px !important;
+        }
+        .footer-columns-row {
+          gap: 20px !important;
+        }
+        .footer-bottom-section {
+          margin-top: 18px !important;
         }
       }
     `}</style>
