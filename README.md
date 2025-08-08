@@ -3,7 +3,7 @@
 
 This is a Next.js app that displays 'kidus production present' on the main page.
 
-## Getting Started
+
 
 
 ## Getting Started
