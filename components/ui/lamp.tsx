@@ -113,7 +113,7 @@ export const LampContainer = ({
         <div className="flex flex-col justify-center items-center w-full lg:w-[60%] mx-auto text-center min-h-[300px]">
           {children}
         </div>
-        {/* Right: Cards vertical list */}
+        {/* Right: Cards-vertical list */}
         <ul
           style={{ color: '#fff', fontSize: '1.2rem', maxWidth: 700, margin: 0, padding: 0, listStyle: 'none' }}
           className="flex flex-col gap-6 w-full max-w-xl lg:w-[40%] items-center mx-auto"
