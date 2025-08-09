@@ -1,5 +1,6 @@
 import "./globals.css";
 import Navbar from "./Navbar";
+import ClientLoader from "../../components/ClientLoader";
 
 export const metadata = {
   title: "Create Next App",
@@ -9,11 +10,22 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, padding: 0 }}>
-        <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", zIndex: 100 }}>
-          <Navbar />
-        </div>
-        {children}
+      <body style={{
+        marginTop: 0,
+        marginRight: 0,
+        marginBottom: 0,
+        marginLeft: 0,
+        paddingTop: 0,
+        paddingRight: 0,
+        paddingBottom: 0,
+        paddingLeft: 0
+      }}>
+        <ClientLoader>
+          <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", zIndex: 100 }}>
+            <Navbar />
+          </div>
+          {children}
+        </ClientLoader>
       </body>
     </html>
   );
